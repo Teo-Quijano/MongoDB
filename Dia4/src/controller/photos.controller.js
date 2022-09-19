@@ -22,14 +22,14 @@ function getPhoto(request,response){
     })
 }
 
-function postPhoto(request,response){
+function postPhoto(request, response){
     console.log("Metodo POST");
     console.log(request.body);
     let photo = new Photo({
-        usuario : request.body.usuario,
-        url : request.body.url,
-        titulo : request.body.titulo,
-        descripcion : request.body.descripcion
+        usuario: request.body.usuario,
+        url: request.body.url,
+        titulo: request.body.titulo,
+        descripcion: request.body.descripcion
     })
     photo.save()
     .then((data)=>
@@ -42,8 +42,6 @@ function postPhoto(request,response){
     {
         console.log(error);
     })
-
-
 }
 
 function putPhoto(request,response){
