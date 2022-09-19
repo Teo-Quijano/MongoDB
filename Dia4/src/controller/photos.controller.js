@@ -1,14 +1,12 @@
-const connection = require("../database")
-const PhotoModel = require("../model/photo")
+const Photo = require("../model/photo")
 
 
 
 function getPhoto(request,response){
-    console.log("lanzada getPhoto");
-//• GET /photos. Dado un usuario obtiene todas sus fotos.
-    id = request.query.id
+    console.log("Metodo GET");
+    usuario = request.query.usuario
 
-    PhotoModel.find({usuario:"usuario"+id})
+    Photo.find({usuario: request.query.usuario})
     .then(function(items){
         let photo=[];
         for (let i = 0; i < items.length; i++) {
@@ -25,10 +23,9 @@ function getPhoto(request,response){
 }
 
 function postPhoto(request,response){
-    console.log("lanzada postPhoto");
-//• POST /photos. Dado un usuario, url de foto, titulo y descripción se debe guardar en la colección.
+    console.log("Metodo POST");
     console.log(request.body);
-    let photo = new PhotoModel ({
+    let photo = new Photo({
         usuario : request.body.usuario,
         url : request.body.url,
         titulo : request.body.titulo,
@@ -50,9 +47,8 @@ function postPhoto(request,response){
 }
 
 function putPhoto(request,response){
-    console.log("lanzada putPhoto");
-//• PUT /photos. Dado el titulo de una foto y una descripción modificar su descripción.
-    PhotoModel.updateOne(
+    console.log("Metodo PUT");
+    Photo.updateOne(
         {titulo : request.body.titulo},
         {descripcion : request.body.descripcion}
     )
@@ -64,23 +60,21 @@ function putPhoto(request,response){
     })
     .catch(function()
     {
-        console.log("Eror");
+        console.log("Error");
     })
 
 }
 
 function deletePhoto(request,response){
 
-    console.log("lanzada deletePhoto");
+    console.log("Metodo DELETE");
+    let usuario = request.body.usuario;
+    let titulo = request.body.titulo;
+    if(usuario !== "" && titulo !== ""){
 
-    let usuario1 = request.body.usuario;
-    let titulo1 = request.body.titulo;
- //• DEL /photos. Dado un usuario y un titulo de foto eliminar su foto.
-    if(usuario1 !== "" && titulo1 !== ""){
-
-        PhotoModel.updateOne(
-                            {usuario :  usuario1, 
-                            titulo : titulo1},
+        Photo.updateOne(
+                            {usuario :  usuario, 
+                            titulo : titulo},
                             {url:""}
                             )
         .then((data)=>
@@ -91,12 +85,11 @@ function deletePhoto(request,response){
         })
         .catch(function()
         {
-            console.log("Eror");
+            console.log("Error");
         })
-    }if(usuario1 !== "" && titulo1 == ""){
-//• DEL /photos. Dado un usuario eliminar todas sus fotos.
-        PhotoModel.updateMany(
-                            {usuario : usuario1},
+    }if(usuario !== "" && titulo == ""){
+        Photo.updateMany(
+                            {usuario : usuario},
                             {url:""}
                             )
         .then((data)=>
@@ -107,7 +100,7 @@ function deletePhoto(request,response){
         })
         .catch(function()
         {
-            console.log("Eror");
+            console.log("Error");
         })
     }
 
