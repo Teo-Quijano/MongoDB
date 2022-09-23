@@ -34,7 +34,7 @@ function postPhoto(request, response){
     photo.save()
     .then((data)=>
     {
-        console.log("Photo guardada correctamente");
+        console.log("Foto guardada correctamente");
         console.log(data);
         response.send(data)
     })
@@ -47,8 +47,9 @@ function postPhoto(request, response){
 function putPhoto(request,response){
     console.log("Metodo PUT");
     Photo.updateOne(
-        {titulo : request.body.titulo},
-        {descripcion : request.body.descripcion}
+        { _id: request.body._id}, 
+        {descripcion : request.body.descripcion, titulo : request.body.titulo}
+      
     )
     .then((data)=>
     {
@@ -71,10 +72,9 @@ function deletePhoto(request,response){
     if(usuario !== "" && titulo !== ""){
 
         Photo.updateOne(
-                            {usuario :  usuario, 
+                            {usuario : usuario, 
                             titulo : titulo},
-                            {url:""}
-                            )
+        )
         .then((data)=>
         {
             console.log("Modificación realizada.");
@@ -88,8 +88,7 @@ function deletePhoto(request,response){
     }if(usuario !== "" && titulo == ""){
         Photo.updateMany(
                             {usuario : usuario},
-                            {url:""}
-                            )
+        )
         .then((data)=>
         {
             console.log("Modificación realizada.");

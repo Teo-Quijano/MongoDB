@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="./clases/profesional.js"></script>
+    <script src="./clases/pelicula.js"></script>
+    <script src="./controller/profesionales.js"></script>
+    <script src="./controller/peliculas.js"></script>
+    <script src="./controller/adicionales.js"></script>
+    <script src="./index.js"></script>
+    <title>IMB API REST</title>
+</head>
+
+<main class="container">
+    <div class="row">
+        <nav class="col-12 navbar navbar-expand-lg navbar-dark style= background-color: #e3f2fd;">
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a id="enlace-profesionales" class="nav-link active" aria-current="page"
+                            href="#">Profesionales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="enlace-peliculas" class="nav-link" href="#">Peliculas</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    </nav>
+
+    <section id="profesionales" class="col-12">
+        <h5 class="py-4 border-bottom border-2">Datos de Profesionales</h5>
+        <form id="profesionales-form">
+
+            <div class="row">
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Nombre *</span>
+                        <input id="nombre-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el nombre">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Edad *</span>
+                        <input id="edad-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la edad">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Peso</span>
+                        <input id="peso-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el peso">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Altura</span>
+                        <input id="altura-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la altura">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Color del pelo</span>
+                        <input id="color-pelo-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba color del pelo">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Color de ojos</span>
+                        <input id="color-ojos-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba color de ojos">
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Nacionalidad *</span>
+                        <input id="nacionalidad-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba nacionalidad">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text w-25">Nº de Oscares</span>
+                        <input id="oscars-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba número de Oscares">
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-6">
+                            <select class="form-select form-select-sm" id="raza-profesional">
+                                <option selected>Raza *</option>
+                                <option value="Americana">Latina</option>
+                                <option value="Caucásica">Caucásica</option>
+                                <option value="Etiópica">Afrodescendiente</option>
+                                <option value="Malaya">Asiatica</option>
+                                <option value="Mongólica">India</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-select form-select-sm" id="profesion-profesional">
+                                <option selected>Profesión *</option>
+                                <option value="Actor">Actor</option>
+                                <option value="Director">Director</option>
+                                <option value="Guionista">Guionista</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <label class="form-label">Género:</label>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero-profesional"
+                                    id="profesional-femenino" value="Femenino" checked>
+                                <label class="form-check-label" for="profesional-femenino">
+                                    Femenino
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="genero-profesional"
+                                    id="profesional-masculino" value="Masculino">
+                                <label class="form-check-label" for="profesional-masculino">
+                                    Masculino
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6 align-self-center">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="retirado-profesional">
+                                <label class="form-check-label" for="retirado-profesional">Está retirado</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="input-group my-3">
+                        <span class="input-group-text w-25">ID profesional</span>
+                        <input id="id-profesional" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el ID del profesional">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row d-flex justify-content-between">
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100" id="mostrar-profesional">Mostrar</button>
+                </div>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100" id="crear-profesional">Crear</button>
+                </div>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100"
+                        id="modificar-profesional">Modificar</button>
+                </div>
+                <dic class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100"
+                        id="eliminar-profesional">Eliminar</button>
+                </dic>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-danger btn-sm w-100"
+                        id="reiniciar-profesional">Reiniciar</button>
+                </div>
+            </div>
+
+        </form>
+    </section>
+
+    <section id="peliculas" class="col-12" style="display: none;">
+        <h5 class="py-4 border-bottom border-2">Datos de Peliculas</h5>
+        <form id="peliculas-form">
+
+            <div class="row">
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Título *</span>
+                        <input id="titulo-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el título">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Año</span>
+                        <input id="anio-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el año de lanzamiento">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Nacionalidad *</span>
+                        <input id="nacionalidad-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la nacionalidad">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Idioma</span>
+                        <input id="idioma-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el idioma">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Plataforma</span>
+                        <input id="plataforma-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la plataforma">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Personaje</span>
+                        <input id="personaje-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el personaje principal">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Distribuidora *</span>
+                        <input id="distribuidora-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la distribuidora">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text w-25">Productora *</span>
+                        <input id="productora-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba la productora">
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-lg-6">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-1">
+                                <span class="input-group-text w-25">Nombre</span>
+                                <input id="nombre-pelicula" type="text" class="form-control form-control-sm"
+                                    placeholder="Escriba el nombre de un profesional">
+                            </div>
+                        </div>
+
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-success btn-sm w-100"
+                                id="btn-agregar-actor">Actor</button>
+                        </div>
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-danger btn-sm w-100"
+                                id="btn-quitar-actor">Actor</button>
+                        </div>
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-success btn-sm w-100"
+                                id="btn-agregar-director">Director</button>
+                        </div>
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-danger btn-sm w-100"
+                                id="btn-quitar-director">Director</button>
+                        </div>
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-success btn-sm w-100"
+                                id="btn-agregar-guionista">Guionista</button>
+                        </div>
+                        <div class="col-2 pe-0">
+                            <button type="button" class="btn btn-danger btn-sm w-100"
+                                id="btn-quitar-guionista">Guionista</button>
+                        </div>
+
+
+                        <div class="col-4 pe-0">
+                            <textarea class="form-control my-2" rows="5" id="actores-pelicula" readonly></textarea>
+                        </div>
+                        <div class="col-4 pe-0">
+                            <textarea class="form-control my-2" rows="5" id="directores-pelicula" readonly></textarea>
+                        </div>
+                        <div class="col-4 pe-0">
+                            <textarea class="form-control my-2" rows="5" id="guionistas-pelicula" readonly></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-text w-30">Género</span>
+                        <input id="genero-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el género">
+                    </div>
+
+                    <div class="input-group my-3">
+                        <span class="input-group-text w-25">Id pelicula</span>
+                        <input id="id-pelicula" type="text" class="form-control form-control-sm"
+                            placeholder="Escriba el ID de la película">
+                    </div>
+
+                    <div class="form-check my-2">
+                        <input type="radio" class="form-check-input" id="ismcu-pelicula">
+                        <label class="form-check-label" for="ismcu-pelicula">Universo Marvel</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row d-flex justify-content-between">
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100" id="mostrar-pelicula">Mostrar</button>
+                </div>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100" id="crear-pelicula">Crear</button>
+                </div>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100"
+                        id="modificar-pelicula">Modificar</button>
+                </div>
+                <dic class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-primary btn-sm w-100" id="eliminar-pelicula">Eliminar</button>
+                </dic>
+                <div class="col-12 col-lg-2 mb-2 mb-lg-0">
+                    <button type="button" class="btn btn-danger btn-sm w-100" id="reiniciar-pelicula">Reiniciar</button>
+                </div>
+            </div>
+
+        </form>
+    </section>
+
+    <section class="col-12">
+        <h5 class="border-bottom border-1 py-2">Datos Encontrados</h5>
+        <div id="tabla-resultados" class="row"></div>
+    </section>
+
+    </div>
+</main>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="alertaToast" class="toast align-items-center text-withe border-0 bg-success" role="alert">
+        <div class="d-flex">
+            <div id="alertaToastCuerpo" class="toast-body"></div>
+            <button type="button" class="btn-close btn-close-black me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+</body>
+
+</html> 
